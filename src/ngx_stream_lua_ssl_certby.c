@@ -1331,4 +1331,15 @@ failed:
 #endif  /* NGX_LUA_NO_FFI_API */
 
 
+ngx_ssl_conn_t *
+ngx_stream_lua_ffi_get_ssl_pointer(ngx_stream_lua_request_t *r)
+{
+    if (r->connection == NULL || r->connection->ssl == NULL) {
+        return NULL;
+    }
+
+    return r->connection->ssl->connection;
+}
+
+
 #endif /* NGX_STREAM_SSL */
