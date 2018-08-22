@@ -1,5 +1,13 @@
 
 /*
+ * !!! DO NOT EDIT DIRECTLY !!!
+ * This file was automatically generated from the following template:
+ *
+ * src/subsys/ngx_subsys_lua_common.h.tt2
+ */
+
+
+/*
  * Copyright (C) Xiaozhe Wang (chaoslawful)
  * Copyright (C) Yichun Zhang (agentzh)
  */
@@ -118,6 +126,7 @@
 #define NGX_STREAM_LUA_CONTEXT_INIT_WORKER                          0x0008
 #define NGX_STREAM_LUA_CONTEXT_BALANCER                             0x0010
 #define NGX_STREAM_LUA_CONTEXT_PREREAD                              0x0020
+#define NGX_STREAM_LUA_CONTEXT_SSL_CERT                             0x0040
 
 
 #ifndef NGX_LUA_NO_FFI_API
@@ -225,6 +234,12 @@ struct ngx_stream_lua_srv_conf_s {
     ngx_uint_t              ssl_verify_depth;
     ngx_str_t               ssl_trusted_certificate;
     ngx_str_t               ssl_crl;
+
+    struct {
+        ngx_stream_lua_srv_conf_handler_pt           ssl_cert_handler;
+        ngx_str_t                                    ssl_cert_src;
+        u_char                                      *ssl_cert_src_key;
+    } srv;
 #endif
 
     ngx_flag_t              enable_code_cache; /* whether to enable
